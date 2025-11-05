@@ -3,7 +3,7 @@ import { Navigation } from "@/components/navigation";
 
 export default function ContactPage() {
   return (
-    <div className="flex min-h-screen flex-col items-center p-4 md:p-24">
+    <div className="flex min-h-screen flex-col items-center p-8">
       <nav
         className="sticky top-4 z-50 w-full max-w-2xl bg-white/80 backdrop-blur-sm border rounded-full mb-8"
         role="navigation"
@@ -14,7 +14,7 @@ export default function ContactPage() {
         </div>
       </nav>
 
-      <div className="w-full max-w-4xl">
+      <div className="w-full max-w-2xl">
         <main>
           <ComingSoon />
         </main>

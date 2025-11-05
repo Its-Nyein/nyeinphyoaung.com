@@ -5,7 +5,7 @@ export default function ProjectsPage() {
   return (
     <div className="flex min-h-screen flex-col items-center p-8">
       <nav
-        className="sticky top-4 z-50 w-full max-w-2xl bg-white/80 backdrop-blur-sm border rounded-full mb-8"
+        className="sticky top-4 z-50 w-full max-w-2xl bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-8"
         role="navigation"
         aria-label="Main navigation"
       >

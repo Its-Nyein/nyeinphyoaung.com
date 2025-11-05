@@ -114,15 +114,11 @@ function SkillOrbit({
         <div
           className={`relative group ${size === "large" ? "scale-110" : size === "medium" ? "scale-100" : "scale-90"}`}
         >
-          <div
-            className={`p-3 rounded-xl border bg-white shadow-md hover:shadow-xl transition-all duration-300 ${skill.color} hover:scale-110 cursor-pointer`}
-          >
-            <Icon className="h-6 w-6" />
+          <div className="p-3 rounded-xl border border-white/20 from-white/20 to-white/10 shadow-md hover:shadow-xl hover:from-white/30 hover:to-white/20 transition-all duration-300 hover:scale-110 cursor-pointer">
+            <Icon className="h-6 w-6 text-white" />
           </div>
           {showName && (
-            <div
-              className={`absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1 ${skill.color} bg-current/10 border border-current/20 text-xs rounded-lg whitespace-nowrap z-50 animate-fade-in font-medium`}
-            >
+            <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 px-3 py-1 from-white/20 to-white/10 border border-white/20 text-xs rounded-lg whitespace-nowrap z-50 animate-fade-in font-medium text-white backdrop-blur-sm">
               {skill.name}
             </div>
           )}
@@ -139,16 +135,16 @@ export function SkillsShowcase({ skills }: SkillsShowcaseProps) {
 
   return (
     <div className="space-y-8">
-      <div className="rounded-2xl border from-gray-50 via-white to-blue-50 p-12 shadow-lg overflow-hidden">
+      <div className="rounded-2xl border border-white/20 bg-black/50 p-12 shadow-lg overflow-hidden">
         <div
           className="relative flex items-center justify-center"
           style={{ height: "600px" }}
         >
           <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-24 h-24 rounded-full from-blue-500 to-purple-600 shadow-2xl flex items-center justify-center animate-pulse-slow">
-              <div className="w-20 h-20 rounded-full bg-white flex items-center justify-center">
+            <div className="w-24 h-24 rounded-full from-white/20 to-white/10 shadow-2xl flex items-center justify-center animate-pulse-slow border border-white/20">
+              <div className="w-20 h-20 rounded-full from-white/25 to-white/15 flex items-center justify-center">
                 <svg
-                  className="h-10 w-10 text-blue-600"
+                  className="h-10 w-10 text-white"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"
@@ -165,9 +161,9 @@ export function SkillsShowcase({ skills }: SkillsShowcaseProps) {
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-            <div className="absolute w-[400px] h-[400px] rounded-full border border-dashed border-gray-200 opacity-30" />
-            <div className="absolute w-[560px] h-[560px] rounded-full border border-dashed border-gray-200 opacity-20" />
-            <div className="absolute w-[280px] h-[280px] rounded-full border border-dashed border-gray-200 opacity-40" />
+            <div className="absolute w-[400px] h-[400px] rounded-full border border-dashed border-white/20 opacity-40" />
+            <div className="absolute w-[560px] h-[560px] rounded-full border border-dashed border-white/20 opacity-30" />
+            <div className="absolute w-[280px] h-[280px] rounded-full border border-dashed border-white/20 opacity-50" />
           </div>
 
           <div className="absolute inset-0 flex items-center justify-center">

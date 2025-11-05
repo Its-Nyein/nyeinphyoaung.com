@@ -9,7 +9,7 @@ export default function HomePage() {
   return (
     <div className="flex min-h-screen flex-col items-center p-8">
       <nav
-        className="sticky top-4 z-50 w-full max-w-2xl bg-white/80 backdrop-blur-sm border rounded-full mb-8"
+        className="sticky top-4 z-50 w-full max-w-2xl bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-8"
         role="navigation"
         aria-label="Main navigation"
       >
@@ -44,7 +44,7 @@ export default function HomePage() {
           >
             <h2
               id="recent-posts-heading"
-              className="mb-4 text-center text-xl font-bold"
+              className="mb-4 text-center text-xl font-bold text-white"
             >
               Recent Posts
             </h2>
@@ -53,13 +53,13 @@ export default function HomePage() {
 
           {/* Footer */}
           <footer
-            className="mt-8 text-center text-sm text-muted-foreground"
+            className="mt-8 text-center text-sm text-white/70"
             role="contentinfo"
           >
             <div className="mb-4 flex items-center justify-center">
               <a
                 href="/rss.xml"
-                className="flex items-center space-x-2 text-muted-foreground hover:text-foreground transition-colors"
+                className="flex items-center space-x-2 text-white/70 hover:text-white transition-colors"
                 aria-label="RSS feed"
               >
                 <Rss className="h-5 w-5" />

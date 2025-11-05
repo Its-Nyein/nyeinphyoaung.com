@@ -15,7 +15,10 @@ export function Navigation() {
         variant="ghost"
         size="icon"
         asChild
-        className={cn("rounded-full", pathname === "/" && "bg-muted")}
+        className={cn(
+          "rounded-full text-white hover:text-white hover:bg-gradient-to-br hover:from-white/20 hover:to-white/10 transition-all duration-300",
+          pathname === "/" && "bg-gradient-to-br from-white/20 to-white/10",
+        )}
       >
         <Link href="/" aria-label="Home">
           <Home className="h-5 w-5" />
@@ -27,8 +30,9 @@ export function Navigation() {
         size="icon"
         asChild
         className={cn(
-          "rounded-full",
-          pathname.startsWith("/blog") && "bg-muted",
+          "rounded-full text-white hover:text-white hover:bg-gradient-to-br hover:from-white/20 hover:to-white/10 transition-all duration-300",
+          pathname.startsWith("/blog") &&
+            "bg-gradient-to-br from-white/20 to-white/10",
         )}
       >
         <Link href="/blog" aria-label="Blog">
@@ -41,8 +45,9 @@ export function Navigation() {
         size="icon"
         asChild
         className={cn(
-          "rounded-full",
-          pathname.startsWith("/projects") && "bg-muted",
+          "rounded-full text-white hover:text-white hover:bg-gradient-to-br hover:from-white/20 hover:to-white/10 transition-all duration-300",
+          pathname.startsWith("/projects") &&
+            "bg-gradient-to-br from-white/20 to-white/10",
         )}
       >
         <Link href="/projects" aria-label="Projects">
@@ -55,8 +60,9 @@ export function Navigation() {
         size="icon"
         asChild
         className={cn(
-          "rounded-full",
-          pathname.startsWith("/skills") && "bg-muted",
+          "rounded-full text-white hover:text-white hover:bg-gradient-to-br hover:from-white/20 hover:to-white/10 transition-all duration-300",
+          pathname.startsWith("/skills") &&
+            "bg-gradient-to-br from-white/20 to-white/10",
         )}
       >
         <Link href="/skills" aria-label="Skills">
@@ -69,8 +75,9 @@ export function Navigation() {
         size="icon"
         asChild
         className={cn(
-          "rounded-full",
-          pathname.startsWith("/contact") && "bg-muted",
+          "rounded-full text-white hover:text-white hover:bg-gradient-to-br hover:from-white/20 hover:to-white/10 transition-all duration-300",
+          pathname.startsWith("/contact") &&
+            "bg-gradient-to-br from-white/20 to-white/10",
         )}
       >
         <Link href="/contact" aria-label="Contact">

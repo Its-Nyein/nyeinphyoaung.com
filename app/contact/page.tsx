@@ -1,4 +1,4 @@
-import { ComingSoon } from "@/components/comming-soon";
+import { Contact } from "@/components/contact";
 import { Navigation } from "@/components/navigation";
 
 export default function ContactPage() {
@@ -16,7 +16,16 @@ export default function ContactPage() {
 
       <div className="w-full max-w-2xl">
         <main>
-          <ComingSoon />
+          <header className="mb-8 text-center">
+            <h1 className="text-3xl font-bold text-center text-white">
+              Contact
+            </h1>
+            <p className="text-white/70 text-center">
+              Let&apos;s connect! Feel free to reach out through any of the
+              channels below.
+            </p>
+          </header>
+          <Contact />
         </main>
       </div>
     </div>

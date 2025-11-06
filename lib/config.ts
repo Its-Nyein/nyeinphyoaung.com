@@ -8,8 +8,10 @@ export const config = {
     bio: "I'm a software engineer with a passion for building web applications and mobile applications.",
     location: "Yangon, Myanmar",
     social: {
-      twitter: "https://twitter.com/nyeinphyoaung",
-      github: "https://github.com/nyeinphyoaung",
+      github: "https://github.com/its-nyein",
+      linkedin: "https://www.linkedin.com/in/nyeinphyoaung/",
+      twitter: "https://x.com/its_nyein",
+      facebook: "https://www.facebook.com/nyeinphyoaung.dev/",
     },
     blogs: {
       postsPerPage: 10,

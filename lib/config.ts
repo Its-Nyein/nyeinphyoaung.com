@@ -3,7 +3,7 @@ export const config = {
     name: "Nyein Phyo Aung",
     email: "nyeinphyoaung.edu@gmail.com",
     url: "https://nyeinphyoaung.com",
-    image: "/nyeinphyoaung.jpg",
+    image: "/avatar.jpg",
     title: "Software Engineer",
     bio: "I'm a software engineer with a passion for building web applications and mobile applications.",
     location: "Yangon, Myanmar",

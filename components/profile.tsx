@@ -10,7 +10,7 @@ export function Profile() {
       <CardContent className="flex flex-col items-center p-0 text-center">
         <div className="relative mb-6 h-32 w-32 overflow-hidden rounded-full border-4 border-background bg-muted shadow-lg">
           <Image
-            src="/nyeinphyoaung.jpg"
+            src="/avatar.jpg"
             alt={`${author.name} profile picture`}
             width={128}
             height={128}

@@ -18,6 +18,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        {/* DNS prefetch for performance */}
+        <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+        <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+        {/* Favicon and app icons */}
+        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

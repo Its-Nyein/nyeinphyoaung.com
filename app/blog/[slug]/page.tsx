@@ -52,7 +52,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               {post.title}
             </h1>
 
-            {/* Tags */}
             {post.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
                 {post.tags.map((tag) => (
@@ -67,7 +66,6 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               </div>
             )}
 
-            {/* Meta Information */}
             <div className="flex flex-wrap items-center gap-4 text-sm text-white/70">
               <div className="flex items-center gap-1.5">
                 <Calendar className="h-4 w-4 text-white/70" />
@@ -83,15 +81,12 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </header>
 
-          {/* Article Content */}
           <div className="prose-container">
             <MarkdownRenderer content={post.content} />
           </div>
 
-          {/* Share Buttons */}
           <div className="mt-8">{/* Share buttons */}</div>
 
-          {/* Article Footer */}
           <footer className="border-t border-white/20 pt-8 mt-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <Button

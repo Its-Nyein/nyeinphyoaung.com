@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { Suspense } from "react";
 import { BlogCard } from "./blog-card";
 import { LoadingSpinner } from "./loading-spinner";
+import { TagsFilterPage } from "./tags-filter-page";
 
 interface BlogPageListsProps {
   posts: Post[];
@@ -22,6 +23,15 @@ function BlogPageLists({ posts, allTags }: BlogPageListsProps) {
 
   return (
     <>
+      {allTags.length > 0 && (
+        <section aria-labelledby="tags-filter-heading">
+          <h2 id="tags-filter-heading" className="sr-only">
+            Tags filter
+          </h2>
+          <TagsFilterPage allTags={allTags} selectedTag={selectedTag} />
+        </section>
+      )}
+
       <section className="min-h-[300px]" aria-labelledby="blog-posts-heading">
         <h2 id="blog-posts-heading" className="sr-only">
           Blog posts list

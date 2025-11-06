@@ -55,7 +55,7 @@ export const getPostBySlug = cache(
       const { data, content } = matter(fileContent);
 
       const metadata = data as BlogMetadata;
-      const readingTime = calculateReadingTime(content);
+      const readingTime = metadata.readingTime || calculateReadingTime(content);
 
       return {
         slug: safeSlug,

@@ -19,4 +19,5 @@ export interface BlogMetadata {
   featured?: boolean;
   image?: string;
   description?: string;
+  readingTime?: number;
 }

@@ -5,15 +5,10 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { contactSchema, type ContactFormData } from "@/lib/contact-schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import {
-  CheckCircle2,
-  Mail as MailIcon,
-  MessageSquare,
-  Send,
-  User,
-} from "lucide-react";
+import { Mail as MailIcon, MessageSquare, Send, User } from "lucide-react";
 import { MouseEvent, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { toast } from "sonner";
 
 export function ContactForm() {
   const {
@@ -30,16 +25,13 @@ export function ContactForm() {
     },
   });
 
-  const [isSubmitted, setIsSubmitted] = useState(false);
   const [messageLength, setMessageLength] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const formRef = useRef<HTMLDivElement>(null);
-  const successRef = useRef<HTMLDivElement>(null);
 
   const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
-    const ref = formRef.current || successRef.current;
-    if (!ref) return;
-    const rect = ref.getBoundingClientRect();
+    if (!formRef.current) return;
+    const rect = formRef.current.getBoundingClientRect();
     setMousePosition({
       x: e.clientX - rect.left,
       y: e.clientY - rect.top,
@@ -47,43 +39,27 @@ export function ContactForm() {
   };
 
   const onSubmit = async (data: ContactFormData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const response = await fetch("/api/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      });
 
-    console.log("Form data:", data);
-    setIsSubmitted(true);
+      if (!response.ok) {
+        throw new Error("Failed to send message");
+      }
 
-    setTimeout(() => {
-      setIsSubmitted(false);
+      toast.success("Message sent successfully! I'll get back to you soon.");
       reset();
       setMessageLength(0);
-    }, 4000);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      toast.error("Failed to send message. Please try again.");
+    }
   };
-
-  if (isSubmitted) {
-    return (
-      <div
-        ref={successRef}
-        onMouseMove={handleMouseMove}
-        className="w-full rounded-xl border border-white/20 backdrop-blur-sm p-8 text-center overflow-hidden transition-all relative"
-        style={{
-          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%), rgba(0, 0, 0, 0.5)`,
-        }}
-      >
-        <div className="flex flex-col items-center space-y-4 relative z-10">
-          <div className="rounded-full bg-white/10 p-4">
-            <CheckCircle2 className="h-8 w-8 text-white" strokeWidth={2} />
-          </div>
-          <div className="space-y-2">
-            <h3 className="text-xl font-semibold text-white">Message Sent!</h3>
-            <p className="text-white/70">
-              Thank you for your message. I&apos;ll get back to you within 24
-              hours.
-            </p>
-          </div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} className="w-full space-y-6">

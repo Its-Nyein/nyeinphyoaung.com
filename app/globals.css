@@ -76,6 +76,11 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+  --blue-sky-foreground: oklch(0.59 0.13 240);
+  --blue-sky-accent: oklch(0.8 0.15 250);
+  --blue-sky-accent-foreground: oklch(1 0 0);
+  --blue-sky-border: oklch(0.6 0.13 240);
+  --blue-sky-ring: oklch(0.69 0.15 235);
 }
 
 .dark {

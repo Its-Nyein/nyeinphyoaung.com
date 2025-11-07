@@ -48,7 +48,7 @@ export function BlogCard({ post }: BlogCardProps) {
         </CardHeader>
         <CardContent className="p-3 pt-0">
           <p className="line-clamp-2 text-sm text-white/70 leading-relaxed">
-            {post.excerpt}
+            {post.description}
           </p>
         </CardContent>
       </Link>

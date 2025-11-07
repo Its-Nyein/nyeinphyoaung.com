@@ -39,7 +39,9 @@ export function RecentBlogCard({ blog }: RecentBlogCardProps) {
             <h3 className="line-clamp-1 font-medium text-white">
               {blog.title}
             </h3>
-            <p className="line-clamp-1 text-xs text-white/70">{blog.excerpt}</p>
+            <p className="line-clamp-1 text-xs text-white/70">
+              {blog.description}
+            </p>
             <div className="flex items-center justify-between text-xs text-white/60">
               <span>{formatDate(blog.date)}</span>
               {blog.readingTime && (

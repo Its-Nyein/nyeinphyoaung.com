@@ -44,7 +44,6 @@ export function MarkdownRenderer({
         remarkPlugins={[remarkGfm]}
         rehypePlugins={[rehypeHighlight]}
         components={{
-          // Custom link component to open external links in new tab
           a: ({ href, children, ...props }) => {
             const isExternal =
               href?.startsWith("http") || href?.startsWith("//");
@@ -60,10 +59,8 @@ export function MarkdownRenderer({
               </a>
             );
           },
-          // Custom code block component
           code: ({ className, children, ...props }) => {
             const match = /language-(\w+)/.exec(className || "");
-            // If className contains language-*, it's a code block, otherwise it's inline
             const isCodeBlock = match !== null;
             return isCodeBlock ? (
               <code className={className} {...props}>
@@ -78,7 +75,6 @@ export function MarkdownRenderer({
               </code>
             );
           },
-          // Custom heading components
           h1: ({ children, ...props }) => (
             <h1
               className="text-3xl font-bold text-white mt-8 mb-4 leading-tight"
@@ -111,13 +107,11 @@ export function MarkdownRenderer({
               {children}
             </h4>
           ),
-          // Custom paragraph component
           p: ({ children, ...props }) => (
             <p className="text-white/80 leading-7 mb-4" {...props}>
               {children}
             </p>
           ),
-          // Custom list components
           ul: ({ children, ...props }) => (
             <ul className="list-disc ml-6 mb-4 space-y-2" {...props}>
               {children}
@@ -133,7 +127,6 @@ export function MarkdownRenderer({
               {children}
             </li>
           ),
-          // Custom blockquote component
           blockquote: ({ children, ...props }) => (
             <blockquote
               className="border-l-4 border-white/30 pl-4 italic text-white/70 my-4"
@@ -142,7 +135,6 @@ export function MarkdownRenderer({
               {children}
             </blockquote>
           ),
-          // Custom image component
           img: ({ src, alt, ...props }) => (
             // eslint-disable-next-line @next/next/no-img-element
             <img
@@ -152,7 +144,6 @@ export function MarkdownRenderer({
               {...props}
             />
           ),
-          // Custom pre component
           pre: ({ children, ...props }) => (
             <pre
               className="bg-gray-900 border border-white/20 rounded-lg p-4 overflow-x-auto my-4"
@@ -161,7 +152,6 @@ export function MarkdownRenderer({
               {children}
             </pre>
           ),
-          // Custom table components
           table: ({ children, ...props }) => (
             <div className="overflow-x-auto my-4">
               <table
@@ -192,7 +182,6 @@ export function MarkdownRenderer({
               {children}
             </td>
           ),
-          // Custom hr component
           hr: ({ ...props }) => (
             <hr className="border-white/20 my-6" {...props} />
           ),

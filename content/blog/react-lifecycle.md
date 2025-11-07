@@ -6,7 +6,7 @@ date: "2025-11-06"
 tags: ["react", "javascript", "frontend"]
 featured: true
 image: ""
-readingTime: 14
+readingTime: 10
 ---
 
 ## Introduction

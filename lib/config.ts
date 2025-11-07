@@ -66,12 +66,12 @@ export const PROJECT_METADATA: Record<string, ProjectMetadata> = {
   },
   "bougette-backend": {
     title: "Bougette Backend",
-    tags: ["Nest.js", "TypeScript", "AWS-S3", "PostgreSQL", "Nest-RBAC"],
+    tags: ["Go", "Echo", "AWS-S3", "Gorm", "MySQL"],
     icon: "Wallet",
   },
   "aerovex-backend": {
     title: "Aerovex Backend",
-    tags: ["Go", "Echo", "AWS-S3", "Gorm", "MySQL"],
+    tags: ["Nest.js", "TypeScript", "AWS-S3", "PostgreSQL", "Nest-RBAC"],
     icon: "Plane",
   },
   "nyein-terminal": {

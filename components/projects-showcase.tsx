@@ -8,18 +8,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import {
-  ExternalLink,
-  FileEdit,
-  GitFork,
-  Image,
-  LayoutGrid,
-  Palette,
-  Sparkles,
-  Star,
-  Zap,
-  type LucideIcon,
-} from "lucide-react";
+import { GridIcon } from "@/components/icons/grid-icon";
+import { RocketIcon } from "@/components/icons/rocket-icon";
+import { WalletIcon } from "@/components/icons/wallet-icon";
+import { PlaneIcon } from "@/components/icons/plane-icon";
+import { TerminalIcon } from "@/components/icons/terminal-icon";
+import { ExternalLink, GitFork, Star } from "lucide-react";
 import { MouseEvent, useRef, useState } from "react";
 
 interface ProjectsShowcaseProps {
@@ -32,13 +26,12 @@ interface ProjectsShowcaseProps {
   forks: number;
 }
 
-const iconMap: Record<string, LucideIcon> = {
-  Image,
-  Palette,
-  FileEdit,
-  Sparkles,
-  Zap,
-  LayoutGrid,
+const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
+  Grid: GridIcon,
+  Rocket: RocketIcon,
+  Wallet: WalletIcon,
+  Plane: PlaneIcon,
+  Terminal: TerminalIcon,
 };
 
 function formatNumber(num: number): string {
@@ -57,7 +50,7 @@ export function ProjectsShowcase({
   stars,
   forks,
 }: ProjectsShowcaseProps) {
-  const Icon = iconMap[icon] || LayoutGrid;
+  const Icon = iconMap[icon] || GridIcon;
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -89,10 +82,7 @@ export function ProjectsShowcase({
           <div className="flex items-start justify-between">
             <div className="flex items-center gap-3 flex-1">
               <div className="p-2 rounded-lg bg-white/5 border border-white/20 group-hover:bg-white/10 transition-colors">
-                <Icon
-                  className="h-5 w-5 text-white/90 group-hover:text-white transition-colors"
-                  strokeWidth={1.5}
-                />
+                <Icon className="h-5 w-5 text-white/90 group-hover:text-white transition-colors" />
               </div>
               <CardTitle className="line-clamp-2 text-xl text-white flex-1">
                 {title}

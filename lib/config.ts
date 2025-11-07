@@ -1,3 +1,5 @@
+import { ProjectMetadata } from "@/types/types";
+
 export const config = {
   author: {
     name: "Nyein Phyo Aung",
@@ -50,3 +52,33 @@ export const allSkills = [
   { name: "Git", icon: "GitIcon", color: "text-orange-600" },
   { name: "Linux", icon: "LinuxIcon", color: "text-gray-900" },
 ];
+
+export const PROJECT_METADATA: Record<string, ProjectMetadata> = {
+  "shadcn-admin": {
+    title: "Shadcn Admin",
+    tags: ["Next.js", "TypeScript", "Shadcn/ui", "TailwindCSS"],
+    icon: "Grid",
+  },
+  moviemissile: {
+    title: "Movie Missile",
+    tags: ["React.js", "TypeScript", "TailwindCSS", "Firebase"],
+    icon: "Rocket",
+  },
+  "bougette-backend": {
+    title: "Bougette Backend",
+    tags: ["Nest.js", "TypeScript", "AWS-S3", "PostgreSQL", "Nest-RBAC"],
+    icon: "Wallet",
+  },
+  "aerovex-backend": {
+    title: "Aerovex Backend",
+    tags: ["Go", "Echo", "AWS-S3", "Gorm", "MySQL"],
+    icon: "Plane",
+  },
+  "nyein-terminal": {
+    title: "Nyein Terminal",
+    tags: ["React.js", "TypeScript", "TailwindCSS"],
+    icon: "Terminal",
+  },
+};
+
+export const FEATURED_PROJECTS = Object.keys(PROJECT_METADATA);

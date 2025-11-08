@@ -59,7 +59,6 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
             boxShadow: "0 4px 20px rgba(0, 0, 0, 0.5)",
           }}
         >
-          {/* Header Section - Clean, minimal design aligned with app theme */}
           <Section
             style={{
               background: "rgba(59, 130, 246, 0.9)",
@@ -93,9 +92,7 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
             </Text>
           </Section>
 
-          {/* Content Section */}
           <Section style={{ padding: "40px 30px" }}>
-            {/* Greeting */}
             <Heading
               as="h2"
               style={{
@@ -108,8 +105,6 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
             >
               Hello!
             </Heading>
-
-            {/* Message Introduction */}
             <Text
               style={{
                 marginBottom: "32px",
@@ -123,7 +118,6 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
               portfolio contact form.
             </Text>
 
-            {/* Sender Info Card */}
             <Section
               style={{
                 background: "rgba(59, 130, 246, 0.05)",
@@ -198,8 +192,6 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
                 </tbody>
               </table>
             </Section>
-
-            {/* Message Section */}
             <Section
               style={{
                 background: "rgba(255, 255, 255, 0.05)",
@@ -236,7 +228,6 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
               </Text>
             </Section>
 
-            {/* Action Button */}
             <Section style={{ textAlign: "center" as const }}>
               <Link
                 href={`mailto:${email}?subject=Re: Your message&body=Hi ${name},%0D%0A%0D%0A`}
@@ -257,7 +248,6 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
               </Link>
             </Section>
 
-            {/* Alternative Link Section */}
             <Section
               style={{
                 marginTop: "20px",
@@ -287,7 +277,6 @@ export function EmailTemplate({ name, email, message }: EmailTemplateProps) {
             </Section>
           </Section>
 
-          {/* Footer */}
           <Section
             style={{
               background: "rgba(0, 0, 0, 0.3)",

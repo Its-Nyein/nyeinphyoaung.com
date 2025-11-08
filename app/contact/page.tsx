@@ -1,5 +1,20 @@
 import { Contact } from "@/components/contact";
 import { Navigation } from "@/components/navigation";
+import { config } from "@/lib/config";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Contact | Nyein Phyo Aung",
+  description: "Contact page by Nyein Phyo Aung",
+  openGraph: {
+    title: "Contact | Nyein Phyo Aung",
+    description: "Contact page by Nyein Phyo Aung",
+    url: `${config.author.url}/contact`,
+  },
+  alternates: {
+    canonical: `${config.author.url}/contact`,
+  },
+};
 
 export default function ContactPage() {
   return (

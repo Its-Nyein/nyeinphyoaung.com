@@ -5,11 +5,11 @@ import { config } from "@/lib/config";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Blog",
-  description: "Blog posts by Nyein Phyo Aung",
+  title: "Blog | Nyein Phyo Aung",
+  description: "Blog page by Nyein Phyo Aung",
   openGraph: {
     title: "Blog | Nyein Phyo Aung",
-    description: "Blog posts by Nyein Phyo Aung",
+    description: "Blog page by Nyein Phyo Aung",
     url: `${config.author.url}/blog`,
   },
   alternates: {

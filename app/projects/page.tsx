@@ -6,11 +6,11 @@ import { Metadata } from "next";
 import { GithubProject } from "@/types/types";
 
 export const metadata: Metadata = {
-  title: "Projects",
-  description: "Projects by Nyein Phyo Aung",
+  title: "Projects | Nyein Phyo Aung",
+  description: "Projects page by Nyein Phyo Aung",
   openGraph: {
     title: "Projects | Nyein Phyo Aung",
-    description: "Projects by Nyein Phyo Aung",
+    description: "Projects page by Nyein Phyo Aung",
     url: `${config.author.url}/projects`,
   },
   alternates: {

@@ -4,7 +4,21 @@ import { Profile } from "@/components/profile";
 import { RecentBlogs } from "@/components/recent-blogs";
 import { config } from "@/lib/config";
 import { Rss } from "lucide-react";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Home | Nyein Phyo Aung",
+  description: "Home page by Nyein Phyo Aung",
+  openGraph: {
+    title: "Home | Nyein Phyo Aung",
+    description: "Home page by Nyein Phyo Aung",
+    url: `${config.author.url}`,
+  },
+  alternates: {
+    canonical: `${config.author.url}`,
+  },
+};
 
 export default function HomePage() {
   return (
@@ -27,12 +41,6 @@ export default function HomePage() {
             </h1>
             <Profile />
           </section>
-
-          {/* <section aria-labelledby="social-heading">
-            <h2 id="social-heading" className="sr-only">
-              Social links
-            </h2>
-          </section> */}
 
           <section className="w-full" aria-labelledby="recent-posts-heading">
             <h2

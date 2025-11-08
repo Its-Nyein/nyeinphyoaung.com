@@ -97,7 +97,7 @@ export function ProjectsShowcase({
           </p>
           <div className="flex items-center gap-4 text-xs text-white/60">
             <div className="flex items-center gap-1">
-              <Star className="h-3.5 w-3.5 fill-yellow-400/80 text-yellow-400/80" />
+              <Star className="h-3.5 w-3.5" />
               <span className="font-medium">{formatNumber(stars)}</span>
             </div>
             <div className="flex items-center gap-1">

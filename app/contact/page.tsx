@@ -36,8 +36,12 @@ export default function ContactPage() {
               Contact
             </h1>
             <p className="text-white/70 text-center">
-              Let&apos;s connect! Feel free to reach out through any of the
-              channels below.
+              {/* Let&apos;s connect! Feel free to reach out through any of the
+              channels below. */}
+              Interested in working together? Have a question about my work?
+              Send me a message or connect on social media.
+              {/* I&apos;d love to hear from you! Whether you have a question, want
+              to collaborate, or just want to say hi. */}
             </p>
           </header>
           <Contact />

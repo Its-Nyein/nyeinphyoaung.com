@@ -13,7 +13,6 @@ interface BlogPageListsProps {
 }
 
 function BlogPageLists({ posts, allTags }: BlogPageListsProps) {
-  console.log(posts, allTags);
   const searchParams = useSearchParams();
   const selectedTag = searchParams.get("tag") || null;
 

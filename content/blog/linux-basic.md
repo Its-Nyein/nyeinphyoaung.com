@@ -49,7 +49,7 @@ readingTime: 10
 
 **_Linux File System_**
 
-![linux-file-system.png](/linux-file-system.png)
+![linux-file-system.png](/blog/linux-file-system.png)
 
 အထက်ကပုံမှာ မြင်တွေ့ရတဲ့ (/) Sign လေးဟာ Root Directoryကို ကိုယ်စားပြုပါတယ်။ ပုံမှာမြင်တွေ့ရသလို `/bin, /boot` စတဲ့ File Systemတွေဟာ Root Directoryအောက်ကနေလည်ပတ်ပြီး ဘယ်Fileဟာ ဘယ်လို Dataတွေ၊ ဘယ်လို Informationတွေကို သိမ်းဆည်းမယ်ဆိုတဲ့ တာဝန်ကိုယ်စီလုပ်ဆောင်ကြပါတယ်။
 

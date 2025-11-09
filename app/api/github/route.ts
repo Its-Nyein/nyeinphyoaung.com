@@ -1,6 +1,6 @@
-import { NextResponse } from "next/server";
 import { FEATURED_PROJECTS } from "@/lib/config";
 import { GithubProject, GithubRepository } from "@/types/types";
+import { NextResponse } from "next/server";
 
 export async function GET() {
   try {

@@ -1,7 +1,6 @@
 import { Navigation } from "@/components/navigation";
 import { SkillsShowcase } from "@/components/skills-showcase";
-import { allSkills } from "@/lib/config";
-import { config } from "@/lib/config";
+import { allSkills, config } from "@/lib/config";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

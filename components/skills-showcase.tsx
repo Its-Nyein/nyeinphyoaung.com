@@ -28,13 +28,8 @@ import { ViteIcon } from "@/components/icons/vite-icon";
 import { VueJsIcon } from "@/components/icons/vuejs-icon";
 import { ZodIcon } from "@/components/icons/zod-icon";
 import { ZustandIcon } from "@/components/icons/zustand-icon";
+import type { Skill } from "@/types/types";
 import { useState } from "react";
-
-interface Skill {
-  name: string;
-  icon: string;
-  color: string;
-}
 
 interface SkillsShowcaseProps {
   skills: Skill[];

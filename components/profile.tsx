@@ -1,6 +1,6 @@
-import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { config } from "@/lib/config";
+import Image from "next/image";
 
 export function Profile() {
   const { author } = config;

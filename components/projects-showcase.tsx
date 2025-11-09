@@ -1,5 +1,10 @@
 "use client";
 
+import { GridIcon } from "@/components/icons/grid-icon";
+import { PlaneIcon } from "@/components/icons/plane-icon";
+import { RocketIcon } from "@/components/icons/rocket-icon";
+import { TerminalIcon } from "@/components/icons/terminal-icon";
+import { WalletIcon } from "@/components/icons/wallet-icon";
 import { Badge } from "@/components/ui/badge";
 import {
   Card,
@@ -8,23 +13,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { GridIcon } from "@/components/icons/grid-icon";
-import { RocketIcon } from "@/components/icons/rocket-icon";
-import { WalletIcon } from "@/components/icons/wallet-icon";
-import { PlaneIcon } from "@/components/icons/plane-icon";
-import { TerminalIcon } from "@/components/icons/terminal-icon";
+import { formatNumber } from "@/lib/helpers";
+import type { ProjectsShowcaseProps } from "@/types/types";
 import { ExternalLink, GitFork, Star } from "lucide-react";
 import { MouseEvent, useRef, useState } from "react";
-
-interface ProjectsShowcaseProps {
-  title: string;
-  description: string;
-  tags: string[];
-  link: string;
-  icon: string;
-  stars: number;
-  forks: number;
-}
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Grid: GridIcon,
@@ -33,13 +25,6 @@ const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   Plane: PlaneIcon,
   Terminal: TerminalIcon,
 };
-
-function formatNumber(num: number): string {
-  if (num >= 1000) {
-    return (num / 1000).toFixed(1).replace(/\.0$/, "") + "k";
-  }
-  return num.toString();
-}
 
 export function ProjectsShowcase({
   title,

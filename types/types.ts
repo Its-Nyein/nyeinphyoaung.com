@@ -45,3 +45,19 @@ export interface GithubRepository {
   forks_count: number;
   language: string;
 }
+
+export interface ProjectsShowcaseProps {
+  title: string;
+  description: string;
+  tags: string[];
+  link: string;
+  icon: string;
+  stars: number;
+  forks: number;
+}
+
+export interface Skill {
+  name: string;
+  icon: string;
+  color: string;
+}

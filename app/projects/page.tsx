@@ -1,9 +1,8 @@
 import { Navigation } from "@/components/navigation";
 import { ProjectsShowcase } from "@/components/projects-showcase";
-import { config } from "@/lib/config";
-import { PROJECT_METADATA } from "@/lib/config";
-import { Metadata } from "next";
+import { PROJECT_METADATA, config } from "@/lib/config";
 import { GithubProject } from "@/types/types";
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Projects | Nyein Phyo Aung",

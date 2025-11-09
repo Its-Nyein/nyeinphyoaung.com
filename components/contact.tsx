@@ -2,11 +2,11 @@ import { config } from "@/lib/config";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { ContactForm } from "./contact-form";
-import { buttonVariants } from "./ui/button";
+import { FacebookIcon } from "./icons/facebook-icon";
 import { GitHubIcon } from "./icons/github-icon";
 import { LinkedinIcon } from "./icons/linkedin-icon";
 import { XLogoIcon } from "./icons/x-icon";
-import { FacebookIcon } from "./icons/facebook-icon";
+import { buttonVariants } from "./ui/button";
 
 const SOCIAL_LINKS = [
   {

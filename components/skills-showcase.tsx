@@ -1,6 +1,7 @@
 "use client";
 
 import { AngularIcon } from "@/components/icons/angular-icon";
+import { AWSIcon } from "@/components/icons/aws-icon";
 import { CSSIcon } from "@/components/icons/css-icon";
 import { ExpressJsIcon } from "@/components/icons/expressjs-icon";
 import { FirebaseIcon } from "@/components/icons/firebase-icon";
@@ -22,7 +23,8 @@ import { ReduxIcon } from "@/components/icons/redux-icon";
 import { ShadcnIcon } from "@/components/icons/shadcn-icon";
 import { SQLiteIcon } from "@/components/icons/sqlite-icon";
 import { TailwindCSSIcon } from "@/components/icons/tailwindcss-icon";
-import { TanstackIcon } from "@/components/icons/tanstack-icon";
+import { TanStackQueryIcon } from "@/components/icons/tanstack-query-icon";
+import { TanstackTableIcon } from "@/components/icons/tanstack-table-icon";
 import { TypeScriptIcon } from "@/components/icons/typescript-icon";
 import { ViteIcon } from "@/components/icons/vite-icon";
 import { VueJsIcon } from "@/components/icons/vuejs-icon";
@@ -53,7 +55,8 @@ const iconMap: Record<
   ReduxIcon,
   ZodIcon,
   ZustandIcon,
-  TanstackIcon,
+  TanStackQueryIcon,
+  TanstackTableIcon,
   NodeJsIcon,
   ExpressJsIcon,
   NestJSIcon,
@@ -67,6 +70,7 @@ const iconMap: Record<
   MongoDBIcon,
   GitIcon,
   LinuxIcon,
+  AWSIcon,
 };
 
 function SkillOrbit({

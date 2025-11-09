@@ -36,8 +36,8 @@ export const allSkills = [
   { name: "Redux Toolkit", icon: "ReduxIcon", color: "text-purple-700" },
   { name: "Zod", icon: "ZodIcon", color: "text-blue-600" },
   { name: "Zustand", icon: "ZustandIcon", color: "text-orange-600" },
-  { name: "Tanstack Query", icon: "TanstackIcon", color: "text-red-500" },
-  { name: "Tanstack Table", icon: "TanstackIcon", color: "text-red-500" },
+  { name: "Tanstack Query", icon: "TanStackQueryIcon", color: "text-red-500" },
+  { name: "Tanstack Table", icon: "TanstackTableIcon", color: "text-red-500" },
   { name: "Node.js", icon: "NodeJsIcon", color: "text-green-700" },
   { name: "Express.js", icon: "ExpressJsIcon", color: "text-gray-700" },
   { name: "NestJs", icon: "NestJSIcon", color: "text-red-600" },
@@ -51,6 +51,7 @@ export const allSkills = [
   { name: "MongoDB", icon: "MongoDBIcon", color: "text-green-600" },
   { name: "Git", icon: "GitIcon", color: "text-orange-600" },
   { name: "Linux", icon: "LinuxIcon", color: "text-gray-900" },
+  { name: "AWS", icon: "AWSIcon", color: "text-yellow-500" },
 ];
 
 export const PROJECT_METADATA: Record<string, ProjectMetadata> = {
@@ -60,7 +61,7 @@ export const PROJECT_METADATA: Record<string, ProjectMetadata> = {
     icon: "Grid",
   },
   moviemissile: {
-    title: "Movie Missile",
+    title: "Moviemissile",
     tags: ["React.js", "TypeScript", "TailwindCSS", "Firebase"],
     icon: "Rocket",
   },

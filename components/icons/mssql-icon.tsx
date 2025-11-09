@@ -10,7 +10,7 @@ export function MSSQLIcon(props: React.SVGAttributes<SVGElement>) {
       {...props}
     >
       <title>Microsoft SQL Server</title>
-      <path d="M18.59 24H5.41A5.42 5.42 0 0 1 0 18.59V5.41A5.42 5.42 0 0 1 5.41 0h13.18A5.42 5.42 0 0 1 24 5.41v13.18A5.42 5.42 0 0 1 18.59 24zM12 3.75H7.125v16.5H12V3.75zm4.875 0h-2.438v16.5h2.438V3.75z" />
+      <path d="M12 0L2 6v12l10 6 10-6V6L12 0zm0 1.8l8.6 5.16v10.08L12 22.2 3.4 17.04V6.96L12 1.8zM12 5.4 4.8 10.2 12 15l7.2-4.8L12 5.4zm0 1.92 5.28 3.52L12 14.36 6.72 10.84 12 7.32z" />
     </svg>
   );
 }

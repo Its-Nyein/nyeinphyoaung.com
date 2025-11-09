@@ -2,7 +2,14 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { BookOpen, FolderGit2, Home, Lightbulb, Mail } from "lucide-react";
+import {
+  BookOpen,
+  Briefcase,
+  FolderGit2,
+  Home,
+  Lightbulb,
+  Mail,
+} from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -37,6 +44,21 @@ export function Navigation() {
       >
         <Link href="/blog" aria-label="Blog">
           <BookOpen className="h-5 w-5" />
+        </Link>
+      </Button>
+
+      <Button
+        variant="ghost"
+        size="icon"
+        asChild
+        className={cn(
+          "rounded-full text-white hover:text-white hover:bg-gradient-to-br hover:from-white/20 hover:to-white/10 transition-all duration-300",
+          pathname.startsWith("/experience") &&
+            "bg-gradient-to-br from-white/20 to-white/10",
+        )}
+      >
+        <Link href="/experience" aria-label="Experience">
+          <Briefcase className="h-5 w-5" />
         </Link>
       </Button>
 

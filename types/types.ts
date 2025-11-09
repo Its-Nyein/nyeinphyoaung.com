@@ -61,3 +61,18 @@ export interface Skill {
   icon: string;
   color: string;
 }
+
+export interface ExperienceCardProps {
+  role: string;
+  company: string;
+  companyUrl: string;
+  location: string;
+  locationType: string;
+  type: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  techStack: string[];
+  logo: string;
+  isFirst?: boolean;
+}

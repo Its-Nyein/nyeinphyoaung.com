@@ -19,7 +19,10 @@ export const metadata: Metadata = {
 
 async function getProjects(): Promise<GithubProject[]> {
   try {
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const baseUrl =
+      process.env.NODE_ENV === "production"
+        ? process.env.NEXT_PUBLIC_BASE_URL
+        : "http://localhost:3000";
     const res = await fetch(`${baseUrl}/api/github`, {
       next: { revalidate: 3600 },
     });

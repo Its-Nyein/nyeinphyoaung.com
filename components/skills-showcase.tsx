@@ -3,9 +3,11 @@
 import { AngularIcon } from "@/components/icons/angular-icon";
 import { AWSIcon } from "@/components/icons/aws-icon";
 import { CSSIcon } from "@/components/icons/css-icon";
+import { DrizzleIcon } from "@/components/icons/drizzle-icon";
 import { ExpressJsIcon } from "@/components/icons/expressjs-icon";
 import { FirebaseIcon } from "@/components/icons/firebase-icon";
 import { GitIcon } from "@/components/icons/git-icon";
+import { GolangIcon } from "@/components/icons/golang-icon";
 import { HTMLIcon } from "@/components/icons/html-icon";
 import { JavaScriptIcon } from "@/components/icons/javascript-icon";
 import { LinuxIcon } from "@/components/icons/linux-icon";
@@ -31,7 +33,7 @@ import { VueJsIcon } from "@/components/icons/vuejs-icon";
 import { ZodIcon } from "@/components/icons/zod-icon";
 import { ZustandIcon } from "@/components/icons/zustand-icon";
 import type { Skill } from "@/types/types";
-import { useState } from "react";
+import { MouseEvent, useRef, useState } from "react";
 
 interface SkillsShowcaseProps {
   skills: Skill[];
@@ -60,9 +62,11 @@ const iconMap: Record<
   NodeJsIcon,
   ExpressJsIcon,
   NestJSIcon,
+  GolangIcon,
   MySQLIcon,
   MSSQLIcon,
   PrismaIcon,
+  DrizzleIcon,
   TailwindCSSIcon,
   SQLiteIcon,
   PostgreSQLIcon,
@@ -73,6 +77,234 @@ const iconMap: Record<
   AWSIcon,
 };
 
+const categorizeSkills = (skills: Skill[]) => {
+  return {
+    frontend: skills.filter((skill) => skill.category === "frontend"),
+    backend: skills.filter((skill) => skill.category === "backend"),
+    database: skills.filter((skill) => skill.category === "database"),
+    tools: skills.filter((skill) => skill.category === "tools"),
+  };
+};
+
+export function SkillsShowcase({ skills }: SkillsShowcaseProps) {
+  const { frontend, backend, database, tools } = categorizeSkills(skills);
+
+  const renderSkillCard = (skill: Skill, index: number) => {
+    const Icon = iconMap[skill.icon];
+    if (!Icon) return null;
+
+    return (
+      <div
+        key={skill.name}
+        className="skill-card group h-full"
+        style={{
+          animationDelay: `${index * 0.05}s`,
+        }}
+      >
+        <div className="relative h-full flex flex-col items-center justify-center gap-2 sm:gap-3 p-4 sm:p-5 rounded-xl border border-white/20 bg-linear-to-br from-white/10 to-white/5 backdrop-blur-sm hover:from-white/15 hover:to-white/10 transition-all duration-500 hover:scale-105 hover:shadow-2xl hover:shadow-white/10 hover:border-white/40 hover:-translate-y-2 cursor-pointer">
+          <div className="relative shrink-0">
+            <div className="absolute inset-0 bg-white/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+            <div className="relative p-2 sm:p-3 rounded-lg bg-white/10 group-hover:bg-white/20 transition-all duration-500 group-hover:rotate-360">
+              <Icon className="h-8 w-8 sm:h-9 sm:w-9 text-white drop-shadow-lg" />
+            </div>
+          </div>
+
+          <span className="text-xs sm:text-sm font-semibold text-white text-center leading-tight px-1 min-h-8 sm:min-h-10 flex items-center">
+            {skill.name}
+          </span>
+
+          {/* Decorative corner accents */}
+          <div className="absolute top-0 right-0 w-6 h-6 sm:w-8 sm:h-8 border-t-2 border-r-2 border-white/20 rounded-tr-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+          <div className="absolute bottom-0 left-0 w-6 h-6 sm:w-8 sm:h-8 border-b-2 border-l-2 border-white/20 rounded-bl-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+        </div>
+      </div>
+    );
+  };
+
+  const CategoryCard = ({
+    title,
+    icon,
+    categorySkills,
+    startIndex,
+  }: {
+    title: string;
+    icon: React.ReactNode;
+    categorySkills: Skill[];
+    startIndex: number;
+  }) => {
+    const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+    const cardRef = useRef<HTMLDivElement>(null);
+
+    const handleMouseMove = (e: MouseEvent<HTMLDivElement>) => {
+      if (!cardRef.current) return;
+      const rect = cardRef.current.getBoundingClientRect();
+      setMousePosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
+      });
+    };
+
+    return (
+      <div
+        ref={cardRef}
+        onMouseMove={handleMouseMove}
+        className="rounded-xl sm:rounded-2xl border border-white/20 backdrop-blur-sm p-4 sm:p-5 md:p-6 shadow-lg transition-all hover:shadow-xl relative overflow-hidden"
+        style={{
+          background: `radial-gradient(600px circle at ${mousePosition.x}px ${mousePosition.y}px, rgba(59, 130, 246, 0.15), transparent 40%), rgba(0, 0, 0, 0.5)`,
+        }}
+      >
+        <h2 className="text-lg sm:text-xl font-semibold text-white mb-4 sm:mb-5 flex items-center gap-2">
+          {icon}
+          <span>{title}</span>
+        </h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3 sm:gap-4">
+          {categorySkills.map((skill, index) =>
+            renderSkillCard(skill, startIndex + index),
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const renderCategory = (
+    title: string,
+    icon: React.ReactNode,
+    categorySkills: Skill[],
+    startIndex: number,
+  ) => (
+    <CategoryCard
+      title={title}
+      icon={icon}
+      categorySkills={categorySkills}
+      startIndex={startIndex}
+    />
+  );
+
+  return (
+    <>
+      <div className="space-y-6 sm:space-y-8">
+        {renderCategory(
+          "Frontend Development",
+          <svg
+            className="h-5 w-5 sm:h-6 sm:w-6 text-white/80 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+            />
+          </svg>,
+          frontend,
+          0,
+        )}
+
+        {renderCategory(
+          "Backend Development",
+          <svg
+            className="h-5 w-5 sm:h-6 sm:w-6 text-white/80 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
+            />
+          </svg>,
+          backend,
+          frontend.length,
+        )}
+
+        {renderCategory(
+          "Database & ORM",
+          <svg
+            className="h-5 w-5 sm:h-6 sm:w-6 text-white/80 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"
+            />
+          </svg>,
+          database,
+          frontend.length + backend.length,
+        )}
+
+        {renderCategory(
+          "Tools & DevOps",
+          <svg
+            className="h-5 w-5 sm:h-6 sm:w-6 text-white/80 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+            />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>,
+          tools,
+          frontend.length + backend.length + database.length,
+        )}
+      </div>
+
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from {
+            opacity: 0;
+            transform: translateY(30px) scale(0.95);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+          }
+        }
+
+        @keyframes float {
+          0%,
+          100% {
+            transform: translateY(-2px);
+          }
+          50% {
+            transform: translateY(-8px);
+          }
+        }
+
+        .skill-card {
+          animation: fadeInUp 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .skill-card:hover {
+          animation:
+            fadeInUp 0.6s ease-out forwards,
+            float 2s ease-in-out infinite;
+        }
+      `}</style>
+    </>
+  );
+}
+
+/* ============================================
+ * This was the previous beautiful animated orbit design.
+ * Keeping it commented for future reference or potential toggle option.
 function SkillOrbit({
   skill,
   index,
@@ -270,3 +502,6 @@ export function SkillsShowcase({ skills }: SkillsShowcaseProps) {
     </div>
   );
 }
+*
+* ============================================
+*/

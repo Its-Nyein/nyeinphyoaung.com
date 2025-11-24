@@ -56,10 +56,13 @@ export interface ProjectsShowcaseProps {
   forks: number;
 }
 
+export type SkillCategory = "frontend" | "backend" | "database" | "tools";
+
 export interface Skill {
   name: string;
   icon: string;
   color: string;
+  category: SkillCategory;
 }
 
 export interface ExperienceCardProps {

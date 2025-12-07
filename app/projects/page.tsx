@@ -42,23 +42,25 @@ async function getProjects(): Promise<GithubProject[]> {
 export default async function ProjectsPage() {
   const githubProjects = await getProjects();
 
-  const projects = githubProjects.map((project) => {
-    const metadata = PROJECT_METADATA[project.name] || {
-      title: project.name,
-      tags: project.language ? [project.language] : [],
-      icon: "LayoutGrid",
-    };
+  const projects = githubProjects
+    .map((project) => {
+      const metadata = PROJECT_METADATA[project.name] || {
+        title: project.name,
+        tags: project.language ? [project.language] : [],
+        icon: "LayoutGrid",
+      };
 
-    return {
-      title: metadata.title,
-      description: project.description || "No description available",
-      tags: metadata.tags,
-      link: project.url,
-      icon: metadata.icon,
-      stars: project.stars,
-      forks: project.forks,
-    };
-  });
+      return {
+        title: metadata.title,
+        description: project.description || "No description available",
+        tags: metadata.tags,
+        link: project.url,
+        icon: metadata.icon,
+        stars: project.stars,
+        forks: project.forks,
+      };
+    })
+    .sort((a, b) => b.stars - a.stars);
 
   return (
     <div className="flex min-h-screen flex-col items-center p-8">

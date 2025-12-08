@@ -1,12 +1,17 @@
-import { MarkdownRenderer } from "@/components/md-renderer";
 import { Navigation } from "@/components/navigation";
 import { TagBadge } from "@/components/tag-badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug } from "@/lib/blogs";
 import { formatDate } from "@/lib/helpers";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+
+const MarkdownRenderer = dynamic(
+  () => import("@/components/md-renderer").then((mod) => mod.MarkdownRenderer),
+  { ssr: true },
+);
 
 interface BlogPostPageProps {
   params: Promise<{ slug: string }>;

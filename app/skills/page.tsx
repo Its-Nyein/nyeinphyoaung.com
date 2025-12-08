@@ -1,7 +1,13 @@
 import { Navigation } from "@/components/navigation";
-import { SkillsShowcase } from "@/components/skills-showcase";
 import { allSkills, config } from "@/lib/config";
 import { Metadata } from "next";
+import dynamic from "next/dynamic";
+
+const SkillsShowcase = dynamic(
+  () =>
+    import("@/components/skills-showcase").then((mod) => mod.SkillsShowcase),
+  { ssr: true },
+);
 
 export const metadata: Metadata = {
   title: "Skills | Nyein Phyo Aung",

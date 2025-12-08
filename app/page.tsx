@@ -59,13 +59,7 @@ export default function HomePage() {
             role="contentinfo"
           >
             <div className="mb-4 flex items-center justify-center">
-              <div
-                className="flex items-center space-x-2 text-white/70 hover:text-white transition-colors"
-                aria-label="RSS feed"
-              >
-                <Rss className="h-5 w-5" />
-                <span className="text-sm"></span>
-              </div>
+              <Rss className="h-5 w-5 text-white/70" aria-hidden="true" />
             </div>
             <p>
               &copy; {new Date().getFullYear()} {config.author.name}. All rights

@@ -1,12 +1,17 @@
 import { config } from "@/lib/config";
 import { cn } from "@/lib/utils";
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import { ContactForm } from "./contact-form";
 import { FacebookIcon } from "./icons/facebook-icon";
 import { GitHubIcon } from "./icons/github-icon";
 import { LinkedinIcon } from "./icons/linkedin-icon";
 import { XLogoIcon } from "./icons/x-icon";
 import { buttonVariants } from "./ui/button";
+
+const ContactForm = dynamic(
+  () => import("./contact-form").then((mod) => mod.ContactForm),
+  { ssr: true },
+);
 
 const SOCIAL_LINKS = [
   {

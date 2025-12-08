@@ -61,7 +61,7 @@ export default function HomePage() {
             <div className="mb-4 flex items-center justify-center">
               <Rss className="h-5 w-5 text-white/70" aria-hidden="true" />
             </div>
-            <p>
+            <p suppressHydrationWarning>
               &copy; {new Date().getFullYear()} {config.author.name}. All rights
               reserved.
             </p>

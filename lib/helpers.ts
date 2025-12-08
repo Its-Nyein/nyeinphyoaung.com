@@ -11,11 +11,27 @@ export function calculateReadingTime(content: string): number {
 
 export function formatDate(date: string | Date): string {
   try {
-    return new Date(date).toLocaleDateString("en-US", {
-      year: "numeric",
-      month: "long",
-      day: "numeric",
-    });
+    const dateObj = typeof date === "string" ? new Date(date) : date;
+    const year = dateObj.getUTCFullYear();
+    const month = dateObj.getUTCMonth();
+    const day = dateObj.getUTCDate();
+
+    const monthNames = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    return `${monthNames[month]} ${day}, ${year}`;
   } catch (error) {
     console.error("Error formatting date:", error);
     return "Unknown date";

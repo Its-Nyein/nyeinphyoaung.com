@@ -1,4 +1,5 @@
 import { Navigation } from "@/components/navigation";
+import { ScrollToTop } from "@/components/scroll-to-top";
 import { TagBadge } from "@/components/tag-badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug } from "@/lib/blogs";
@@ -108,6 +109,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
           </footer>
         </article>
       </div>
+      <ScrollToTop />
     </div>
   );
 }

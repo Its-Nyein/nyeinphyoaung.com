@@ -2,9 +2,35 @@
 
 import { cn } from "@/lib/utils";
 import "highlight.js/styles/github-dark.css";
+import { Check, Copy } from "lucide-react";
+import { isValidElement, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import remarkGfm from "remark-gfm";
+
+function CopyButton({ code }: { code: string }) {
+  const [copied, setCopied] = useState(false);
+
+  const handleCopy = async () => {
+    await navigator.clipboard.writeText(code);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  return (
+    <button
+      onClick={handleCopy}
+      className="absolute top-2 right-2 p-2 rounded-md bg-white/10 hover:bg-white/20 transition-colors"
+      aria-label={copied ? "Copied!" : "Copy code"}
+    >
+      {copied ? (
+        <Check className="h-4 w-4 text-green-400" />
+      ) : (
+        <Copy className="h-4 w-4 text-white/70" />
+      )}
+    </button>
+  );
+}
 
 interface MarkdownRendererProps {
   content: string;
@@ -29,8 +55,8 @@ export function MarkdownRenderer({
         "[&>ul]:list-disc [&>ul]:ml-6 [&>ul]:mb-4 [&>ul]:space-y-2 [&>ul>li]:text-white/80",
         "[&>ol]:list-decimal [&>ol]:ml-6 [&>ol]:mb-4 [&>ol]:space-y-2 [&>ol>li]:text-white/80",
         "[&>blockquote]:border-l-4 [&>blockquote]:border-white/30 [&>blockquote]:pl-4 [&>blockquote]:italic [&>blockquote]:text-white/70 [&>blockquote]:my-4",
-        "[&>pre]:bg-gray-900 [&>pre]:border [&>pre]:border-white/20 [&>pre]:rounded-lg [&>pre]:p-4 [&>pre]:overflow-x-auto [&>pre]:my-4",
-        "[&>pre>code]:bg-transparent [&>pre>code]:p-0 [&>pre>code]:text-sm",
+        "[&>div>pre]:bg-gray-900 [&>div>pre]:border [&>div>pre]:border-white/20 [&>div>pre]:rounded-lg [&>div>pre]:p-4 [&>div>pre]:overflow-x-auto [&>div>pre]:my-4",
+        "[&>div>pre>code]:bg-transparent [&>div>pre>code]:p-0 [&>div>pre>code]:text-sm",
         "[&>p>code]:text-sm [&>p>code]:font-mono [&>p>code]:bg-white/10 [&>p>code]:px-1.5 [&>p>code]:py-0.5 [&>p>code]:rounded [&>p>code]:text-white/90",
         "[&>img]:rounded-lg [&>img]:shadow-md [&>img]:my-4 [&>img]:max-w-full",
         "[&>hr]:border-white/20 [&>hr]:my-6",
@@ -144,14 +170,30 @@ export function MarkdownRenderer({
               {...props}
             />
           ),
-          pre: ({ children, ...props }) => (
-            <pre
-              className="bg-gray-900 border border-white/20 rounded-lg p-4 overflow-x-auto my-4"
-              {...props}
-            >
-              {children}
-            </pre>
-          ),
+          pre: ({ children, ...props }) => {
+            const getTextContent = (node: React.ReactNode): string => {
+              if (typeof node === "string") return node;
+              if (typeof node === "number") return String(node);
+              if (Array.isArray(node)) return node.map(getTextContent).join("");
+              if (isValidElement<{ children?: React.ReactNode }>(node)) {
+                return getTextContent(node.props.children);
+              }
+              return "";
+            };
+            const code = getTextContent(children).trim();
+
+            return (
+              <div className="relative group">
+                <CopyButton code={code} />
+                <pre
+                  className="bg-gray-900 border border-white/20 rounded-lg p-4 overflow-x-auto my-4"
+                  {...props}
+                >
+                  {children}
+                </pre>
+              </div>
+            );
+          },
           table: ({ children, ...props }) => (
             <div className="overflow-x-auto my-4">
               <table

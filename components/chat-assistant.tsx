@@ -1,27 +1,17 @@
 "use client";
 
-import { ArrowUp, Bot, Loader2, X } from "lucide-react";
+import { useChatDB } from "@/hooks/use-chat-db";
+import { ArrowUp, Bot, Loader2, Trash2, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-
-interface Message {
-  id: string;
-  role: "user" | "assistant";
-  content: string;
-}
 
 export function ChatAssistant() {
   const [isOpen, setIsOpen] = useState(false);
   const [showToast, setShowToast] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [messages, setMessages] = useState<Message[]>([
-    {
-      id: "welcome",
-      role: "assistant",
-      content: "Hi! I'm Nyein's AI assistant. How can I help you today?",
-    },
-  ]);
   const [input, setInput] = useState("");
   const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const { messages, isLoaded, saveMessage, clearMessages } = useChatDB();
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -42,55 +32,43 @@ export function ChatAssistant() {
   const handleSend = async () => {
     if (!input.trim() || isLoading) return;
 
-    const userMessage: Message = {
-      id: Date.now().toString(),
-      role: "user",
-      content: input.trim(),
-    };
-
-    const newMessages = [...messages, userMessage];
-    setMessages(newMessages);
+    const userContent = input.trim();
     setInput("");
     setIsLoading(true);
+
+    // Save user message
+    await saveMessage("user", userContent);
 
     try {
       const response = await fetch("/api/chat", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
-          messages: newMessages.map((m) => ({
-            role: m.role,
-            content: m.content,
-          })),
+          messages: [
+            ...messages.map((m) => ({
+              role: m.role,
+              content: m.content,
+            })),
+            { role: "user", content: userContent },
+          ],
         }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        const assistantMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content: data.message,
-        };
-        setMessages((prev) => [...prev, assistantMessage]);
+        await saveMessage("assistant", data.message);
       } else {
-        const errorMessage: Message = {
-          id: (Date.now() + 1).toString(),
-          role: "assistant",
-          content:
-            "Sorry, I encountered an error. Please try again or reach out via the contact page.",
-        };
-        setMessages((prev) => [...prev, errorMessage]);
+        await saveMessage(
+          "assistant",
+          "Sorry, I encountered an error. Please try again or reach out via the contact page.",
+        );
       }
     } catch {
-      const errorMessage: Message = {
-        id: (Date.now() + 1).toString(),
-        role: "assistant",
-        content:
-          "Sorry, I'm having trouble connecting. Please try again later.",
-      };
-      setMessages((prev) => [...prev, errorMessage]);
+      await saveMessage(
+        "assistant",
+        "Sorry, I'm having trouble connecting. Please try again later.",
+      );
     } finally {
       setIsLoading(false);
     }
@@ -112,32 +90,48 @@ export function ChatAssistant() {
                 <p className="text-xs text-white/50">Always here to help</p>
               </div>
             </div>
-            <button
-              onClick={() => setIsOpen(false)}
-              className="p-2 rounded-full hover:bg-white/10 transition-colors"
-              aria-label="Close chat"
-            >
-              <X className="h-5 w-5 text-white/70" />
-            </button>
+            <div className="flex items-center gap-1">
+              <button
+                onClick={clearMessages}
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                aria-label="Clear chat"
+                title="Clear chat history"
+              >
+                <Trash2 className="h-4 w-4 text-white/50 hover:text-white/70" />
+              </button>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="p-2 rounded-full hover:bg-white/10 transition-colors"
+                aria-label="Close chat"
+              >
+                <X className="h-5 w-5 text-white/70" />
+              </button>
+            </div>
           </div>
 
           <div className="flex-1 overflow-y-auto p-4 space-y-3">
-            {messages.map((message) => (
-              <div
-                key={message.id}
-                className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-              >
-                <div
-                  className={`max-w-[85%] px-4 py-2.5 text-sm leading-relaxed ${
-                    message.role === "user"
-                      ? "bg-white/15 text-white rounded-2xl rounded-br-md"
-                      : "bg-white/5 text-white/90 rounded-2xl rounded-bl-md"
-                  }`}
-                >
-                  {message.content}
-                </div>
+            {!isLoaded ? (
+              <div className="flex justify-center py-4">
+                <Loader2 className="h-5 w-5 animate-spin text-white/50" />
               </div>
-            ))}
+            ) : (
+              messages.map((message) => (
+                <div
+                  key={message.id}
+                  className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+                >
+                  <div
+                    className={`max-w-[85%] px-4 py-2.5 text-sm leading-relaxed ${
+                      message.role === "user"
+                        ? "bg-white/15 text-white rounded-2xl rounded-br-md"
+                        : "bg-white/5 text-white/90 rounded-2xl rounded-bl-md"
+                    }`}
+                  >
+                    {message.content}
+                  </div>
+                </div>
+              ))
+            )}
             {isLoading && (
               <div className="flex justify-start">
                 <div className="bg-white/5 text-white/90 rounded-2xl rounded-bl-md px-4 py-2.5">

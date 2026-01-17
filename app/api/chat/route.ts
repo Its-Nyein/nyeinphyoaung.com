@@ -1,9 +1,4 @@
-import {
-  EXPERIENCE_DATA,
-  PROJECT_METADATA,
-  allSkills,
-  config,
-} from "@/lib/config";
+import { EXPERIENCE_DATA, allSkills, config } from "@/lib/config";
 import Groq from "groq-sdk";
 import { NextRequest, NextResponse } from "next/server";
 
@@ -37,15 +32,31 @@ ${EXPERIENCE_DATA.map(
 ).join("\n")}
 
 ## Projects
-${Object.entries(PROJECT_METADATA)
-  .map(
-    ([key, project]) => `
-### ${project.title}
-- Repository: ${key}
-- Technologies: ${project.tags.join(", ")}
-`,
-  )
-  .join("\n")}
+
+### Shadcn Admin
+- GitHub: https://github.com/its-nyein/shadcn-admin
+- Technologies: Next.js, TypeScript, Shadcn/ui, TailwindCSS
+- Description: A modern, fully-featured admin dashboard template built with Next.js and Shadcn UI. Features include authentication, data tables with sorting/filtering/pagination, charts and analytics, form handling with validation, dark/light mode, and responsive design. It's a starter template for building admin panels and internal tools.
+
+### Moviemissile
+- GitHub: https://github.com/its-nyein/moviemissile
+- Technologies: React.js, TypeScript, TailwindCSS, Firebase
+- Description: A movie discovery web application that allows users to browse, search, and save their favorite movies. Features include real-time search, movie details, user authentication with Firebase, and a personalized watchlist.
+
+### Bougette Backend
+- GitHub: https://github.com/its-nyein/bougette-backend
+- Technologies: Go, Echo framework, AWS-S3, Gorm, MySQL
+- Description: A RESTful API backend for a budget/expense tracking application. Built with Go and Echo framework, it features user authentication, expense categorization, budget management, file uploads to AWS S3, and database operations with Gorm ORM.
+
+### Aerovex Backend
+- GitHub: https://github.com/its-nyein/aerovex-backend
+- Technologies: Nest.js, TypeScript, AWS-S3, PostgreSQL, Nest-RBAC
+- Description: A comprehensive backend API for an aviation/flight management system. Built with NestJS, it includes role-based access control (RBAC), flight scheduling, booking management, and cloud storage integration with AWS S3.
+
+### Nyein Terminal
+- GitHub: https://github.com/its-nyein/nyein-terminal
+- Technologies: React.js, TypeScript, TailwindCSS
+- Description: An interactive terminal-style portfolio website. Visitors can type commands to navigate and learn about Nyein, his skills, and projects in a unique command-line interface experience.
 
 ## Blog Posts
 Nyein writes technical blog posts on his website. Here are his posts:

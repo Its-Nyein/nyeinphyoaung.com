@@ -1,4 +1,5 @@
 import { Toaster } from "@/components/ui/sonner";
+import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
 import "./globals.css";
@@ -40,7 +41,9 @@ export default function RootLayout({
                 "radial-gradient(ellipse 50% 100% at 10% 0%, rgba(226, 232, 240, 0.15), transparent 65%), #000000",
             }}
           />
-          <div className="relative z-10">{children}</div>
+          <div className="relative z-10">
+            {children} <Analytics />
+          </div>
         </div>
         <Toaster />
       </body>

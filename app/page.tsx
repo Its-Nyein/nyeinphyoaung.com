@@ -1,3 +1,4 @@
+import { ChatAssistant } from "@/components/chat-assistant";
 import { LoadingSpinner } from "@/components/loading-spinner";
 import { Navigation } from "@/components/navigation";
 import { Profile } from "@/components/profile";
@@ -22,52 +23,55 @@ export const metadata: Metadata = {
 
 export default function HomePage() {
   return (
-    <div className="flex min-h-screen flex-col items-center p-8">
-      <nav
-        className="sticky top-4 z-50 w-full max-w-2xl bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-8"
-        role="navigation"
-        aria-label="Main navigation"
-      >
-        <div className="flex items-center justify-center py-2">
-          <Navigation />
-        </div>
-      </nav>
+    <>
+      <div className="flex min-h-screen flex-col items-center p-8">
+        <nav
+          className="sticky top-4 z-50 w-full max-w-2xl bg-white/10 backdrop-blur-sm border border-white/20 rounded-full mb-8"
+          role="navigation"
+          aria-label="Main navigation"
+        >
+          <div className="flex items-center justify-center py-2">
+            <Navigation />
+          </div>
+        </nav>
 
-      <div className="w-full max-w-2xl">
-        <div className="flex flex-col items-center space-y-8">
-          <section aria-labelledby="profile-heading">
-            <h1 id="profile-heading" className="sr-only">
-              Profile
-            </h1>
-            <Profile />
-          </section>
+        <div className="w-full max-w-2xl">
+          <div className="flex flex-col items-center space-y-8">
+            <section aria-labelledby="profile-heading">
+              <h1 id="profile-heading" className="sr-only">
+                Profile
+              </h1>
+              <Profile />
+            </section>
 
-          <section className="w-full" aria-labelledby="recent-posts-heading">
-            <h2
-              id="recent-posts-heading"
-              className="mb-4 text-center text-xl font-bold text-white"
+            <section className="w-full" aria-labelledby="recent-posts-heading">
+              <h2
+                id="recent-posts-heading"
+                className="mb-4 text-center text-xl font-bold text-white"
+              >
+                Recent Posts
+              </h2>
+              <Suspense fallback={<LoadingSpinner />}>
+                <RecentBlogs />
+              </Suspense>
+            </section>
+
+            <footer
+              className="mt-8 text-center text-sm text-white/70"
+              role="contentinfo"
             >
-              Recent Posts
-            </h2>
-            <Suspense fallback={<LoadingSpinner />}>
-              <RecentBlogs />
-            </Suspense>
-          </section>
-
-          <footer
-            className="mt-8 text-center text-sm text-white/70"
-            role="contentinfo"
-          >
-            <div className="mb-4 flex items-center justify-center">
-              <Rss className="h-5 w-5 text-white/70" aria-hidden="true" />
-            </div>
-            <p suppressHydrationWarning>
-              &copy; {new Date().getFullYear()} {config.author.name}. All rights
-              reserved.
-            </p>
-          </footer>
+              <div className="mb-4 flex items-center justify-center">
+                <Rss className="h-5 w-5 text-white/70" aria-hidden="true" />
+              </div>
+              <p suppressHydrationWarning>
+                &copy; {new Date().getFullYear()} {config.author.name}. All
+                rights reserved.
+              </p>
+            </footer>
+          </div>
         </div>
       </div>
-    </div>
+      <ChatAssistant />
+    </>
   );
 }

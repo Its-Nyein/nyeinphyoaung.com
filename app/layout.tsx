@@ -1,4 +1,3 @@
-import { ChatAssistant } from "@/components/chat-assistant";
 import { Toaster } from "@/components/ui/sonner";
 import { Geist, Geist_Mono } from "next/font/google";
 import NextTopLoader from "nextjs-toploader";
@@ -44,7 +43,6 @@ export default function RootLayout({
           <div className="relative z-10">{children}</div>
         </div>
         <Toaster />
-        <ChatAssistant />
       </body>
     </html>
   );

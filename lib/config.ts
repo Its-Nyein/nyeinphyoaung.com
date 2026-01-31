@@ -12,7 +12,7 @@ export const config = {
     social: {
       github: "https://github.com/its-nyein",
       linkedin: "https://www.linkedin.com/in/nyeinphyoaung/",
-      twitter: "https://x.com/its_nyein",
+      twitter: "https://x.com/nyein_dev",
       facebook: "https://www.facebook.com/nyeinphyoaung.dev/",
     },
     blogs: {

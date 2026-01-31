@@ -1,10 +1,13 @@
 import { Navigation } from "@/components/navigation";
 import { ScrollToTop } from "@/components/scroll-to-top";
+import { ShareFacebookButton } from "@/components/share-facebook-button";
 import { TagBadge } from "@/components/tag-badge";
 import { Button } from "@/components/ui/button";
 import { getPostBySlug } from "@/lib/blogs";
+import { config } from "@/lib/config";
 import { formatDate } from "@/lib/helpers";
 import { ArrowLeft, Calendar, Clock } from "lucide-react";
+import { Metadata } from "next";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
@@ -18,6 +21,54 @@ interface BlogPostPageProps {
   params: Promise<{ slug: string }>;
 }
 
+export async function generateMetadata({
+  params,
+}: BlogPostPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const post = await getPostBySlug(slug);
+
+  if (!post) {
+    return {
+      title: "Post Not Found",
+    };
+  }
+
+  const postUrl = `${config.author.url}/blog/${slug}`;
+  const ogImage = post.image || config.author.image;
+  const imageUrl = ogImage.startsWith("http")
+    ? ogImage
+    : `${config.author.url}${ogImage}`;
+
+  return {
+    title: post.title,
+    description: post.description || post.excerpt,
+    openGraph: {
+      title: post.title,
+      description: post.description || post.excerpt,
+      url: postUrl,
+      siteName: config.author.name,
+      type: "article",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+      publishedTime: post.date,
+      authors: [config.author.name],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: post.title,
+      description: post.description || post.excerpt,
+      images: [imageUrl],
+      creator: "@nyein_dev",
+    },
+  };
+}
+
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
   const { slug } = await params;
   const post = await getPostBySlug(slug);
@@ -25,6 +76,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   if (!post) {
     notFound();
   }
+
+  const postUrl = `${config.author.url}/blog/${slug}`;
 
   return (
     <div className="flex min-h-screen flex-col items-center p-8">
@@ -91,7 +144,10 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             <MarkdownRenderer content={post.content} />
           </div>
 
-          <div className="mt-8">{/* Share buttons */}</div>
+          <div className="mt-8 flex items-center gap-4">
+            {/* <span className="text-sm text-white/70">Share this post:</span> */}
+            <ShareFacebookButton url={postUrl} title={post.title} />
+          </div>
 
           <footer className="border-t border-white/20 pt-8 mt-8">
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">

@@ -1,3 +1,4 @@
+import { SnowEffect } from "@/components/snow-effect";
 import { Toaster } from "@/components/ui/sonner";
 import { Analytics } from "@vercel/analytics/next";
 import { Geist, Geist_Mono } from "next/font/google";
@@ -33,6 +34,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextTopLoader color="var(--blue-sky-foreground)" showSpinner={false} />
+        <SnowEffect />
         <div className="min-h-screen w-full bg-background relative overflow-hidden">
           <div
             className="absolute inset-0 z-0"

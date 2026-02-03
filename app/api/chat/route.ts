@@ -1,10 +1,69 @@
 import { EXPERIENCE_DATA, allSkills, config } from "@/lib/config";
 import Groq from "groq-sdk";
 import { NextRequest, NextResponse } from "next/server";
+import OpenAI from "openai";
+
+const gemini = new OpenAI({
+  apiKey: process.env.GEMINI_API_KEY,
+  baseURL: process.env.GEMINI_BASE_URL,
+});
 
 const groq = new Groq({
   apiKey: process.env.GROQ_API_KEY,
 });
+
+type ChatMessage = { role: "user" | "assistant"; content: string };
+
+async function generateWithGemini(
+  messages: ChatMessage[],
+  systemPrompt: string,
+): Promise<string> {
+  const response = await gemini.chat.completions.create({
+    model: process.env.GEMINI_MODEL || "google/gemini-2.0-flash-001",
+    messages: [
+      { role: "system", content: systemPrompt },
+      ...messages.map((msg) => ({
+        role: msg.role as "user" | "assistant",
+        content: msg.content,
+      })),
+    ],
+    max_tokens: 1024,
+  });
+
+  return response.choices[0]?.message?.content || "";
+}
+
+async function generateWithGroq(
+  messages: ChatMessage[],
+  systemPrompt: string,
+): Promise<string> {
+  const response = await groq.chat.completions.create({
+    model: "llama-3.3-70b-versatile",
+    messages: [
+      { role: "system", content: systemPrompt },
+      ...messages.map((msg) => ({
+        role: msg.role as "user" | "assistant",
+        content: msg.content,
+      })),
+    ],
+    max_tokens: 500,
+  });
+
+  return response.choices[0]?.message?.content || "";
+}
+
+function isRateLimitError(error: unknown): boolean {
+  if (error instanceof Error) {
+    const message = error.message.toLowerCase();
+    return (
+      message.includes("rate limit") ||
+      message.includes("quota") ||
+      message.includes("429") ||
+      message.includes("resource exhausted")
+    );
+  }
+  return false;
+}
 
 const SYSTEM_PROMPT = `You are Nyein Phyo Aung's personal AI assistant on his portfolio website. You help visitors learn about Nyein, his work experience, projects, and skills. Be friendly, helpful, and concise.
 
@@ -122,6 +181,7 @@ ${allSkills
 ## Guidelines
 - Answer questions about Nyein's background, experience, projects, and skills
 - Be concise and helpful
+- Match the user's language. If they write in Myanmar, respond in Myanmar while keeping technical terms (e.g., Next.js, TypeScript, API) in English. Use the English context above for accuracy.
 - If asked about something not related to Nyein or his work, politely redirect the conversation
 - Don't make up information that's not provided above
 - For contact inquiries, suggest using the contact page or email
@@ -132,26 +192,37 @@ export async function POST(request: NextRequest) {
   try {
     const { messages } = await request.json();
 
-    if (!process.env.GROQ_API_KEY) {
-      return NextResponse.json(
-        { error: "API key not configured" },
-        { status: 500 },
-      );
+    const formattedMessages: ChatMessage[] = messages.map(
+      (msg: { role: string; content: string }) => ({
+        role: msg.role as "user" | "assistant",
+        content: msg.content,
+      }),
+    );
+
+    let content: string | null = null;
+
+    // Try Gemini first (better Myanmar language support)
+    if (process.env.GEMINI_API_KEY) {
+      try {
+        content = await generateWithGemini(formattedMessages, SYSTEM_PROMPT);
+      } catch (error) {
+        // Fall back to Groq on rate limit or quota errors
+        if (isRateLimitError(error)) {
+          console.log("Gemini rate limit reached, falling back to Groq");
+        } else {
+          console.error("Gemini error:", error);
+        }
+      }
     }
 
-    const response = await groq.chat.completions.create({
-      model: "llama-3.3-70b-versatile",
-      messages: [
-        { role: "system", content: SYSTEM_PROMPT },
-        ...messages.map((msg: { role: string; content: string }) => ({
-          role: msg.role as "user" | "assistant",
-          content: msg.content,
-        })),
-      ],
-      max_tokens: 500,
-    });
-
-    const content = response.choices[0]?.message?.content;
+    // Fallback to Groq if Gemini failed or not configured
+    if (!content && process.env.GROQ_API_KEY) {
+      try {
+        content = await generateWithGroq(formattedMessages, SYSTEM_PROMPT);
+      } catch (error) {
+        console.error("Groq error:", error);
+      }
+    }
 
     if (!content) {
       return NextResponse.json(

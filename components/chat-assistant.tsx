@@ -77,7 +77,7 @@ export function ChatAssistant() {
   return (
     <>
       {isOpen && (
-        <div className="fixed inset-x-0 bottom-0 md:inset-auto md:bottom-20 md:right-6 md:w-96 h-dvh md:h-120 bg-black/95 md:bg-gray-900/95 backdrop-blur-md border-t md:border border-white/20 md:rounded-2xl shadow-2xl z-50 flex flex-col">
+        <div className="fixed inset-x-0 bottom-0 md:inset-auto md:bottom-20 md:right-6 md:w-96 h-screen md:h-120 bg-black/95 md:bg-gray-900/95 backdrop-blur-md border-t md:border border-white/20 md:rounded-2xl shadow-2xl z-50 flex flex-col safe-area-inset-bottom chat-container">
           <div className="flex items-center justify-between p-4 border-b border-white/20">
             <div className="flex items-center gap-2">
               <div className="w-8 h-8 rounded-full bg-white/10 flex items-center justify-center">
@@ -109,7 +109,7 @@ export function ChatAssistant() {
             </div>
           </div>
 
-          <div className="flex-1 overflow-y-auto p-4 space-y-3">
+          <div className="flex-1 overflow-y-auto p-4 space-y-3 min-h-0">
             {!isLoaded ? (
               <div className="flex justify-center py-4">
                 <Loader2 className="h-5 w-5 animate-spin text-white/50" />
@@ -142,7 +142,7 @@ export function ChatAssistant() {
             <div ref={messagesEndRef} />
           </div>
 
-          <div className="p-4 border-t border-white/10">
+          <div className="p-4 pb-safe border-t border-white/10 shrink-0">
             <div className="flex items-end gap-2 bg-white/5 border border-white/10 rounded-2xl p-2">
               <textarea
                 value={input}
@@ -157,6 +157,7 @@ export function ChatAssistant() {
                 rows={1}
                 disabled={isLoading}
                 className="flex-1 px-2 py-1.5 bg-transparent text-white text-sm placeholder:text-white/40 focus:outline-none resize-none max-h-32 disabled:opacity-50"
+                style={{ fontSize: "16px" }}
               />
               <button
                 onClick={handleSend}

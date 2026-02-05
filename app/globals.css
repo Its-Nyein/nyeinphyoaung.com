@@ -125,6 +125,23 @@
     @apply bg-black text-white;
   }
 
+  /* iOS safe area insets support */
+  .safe-area-inset-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0);
+  }
+
+  .pb-safe {
+    padding-bottom: max(1rem, env(safe-area-inset-bottom, 0));
+  }
+
+  /* Prevent iOS viewport resize on input focus */
+  @supports (-webkit-touch-callout: none) {
+    .chat-container {
+      height: 100vh;
+      height: -webkit-fill-available;
+    }
+  }
+
   @keyframes snow-fall {
     0% {
       transform: translateY(-5vh) translateX(0);

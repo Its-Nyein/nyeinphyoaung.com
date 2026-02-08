@@ -34,7 +34,7 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
         {/* Favicon and app icons */}
-        <link rel="icon" href="/favicon.ico" sizes="32x32" />
+        <link rel="icon" href="/favicon.svg" sizes="32x32" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}

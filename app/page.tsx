@@ -61,7 +61,15 @@ export default function HomePage() {
               role="contentinfo"
             >
               <div className="mb-4 flex items-center justify-center">
-                <Rss className="h-5 w-5 text-white/70" aria-hidden="true" />
+                <a
+                  href="/feed.xml"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="RSS Feed"
+                  className="text-white/70 transition-colors hover:text-orange-400"
+                >
+                  <Rss className="h-5 w-5" />
+                </a>
               </div>
               <p suppressHydrationWarning>
                 &copy; {new Date().getFullYear()} {config.author.name}. All

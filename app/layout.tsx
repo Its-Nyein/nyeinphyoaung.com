@@ -35,6 +35,14 @@ export default function RootLayout({
 
         {/* Favicon and app icons */}
         <link rel="icon" href="/favicon.svg" sizes="32x32" />
+
+        {/* RSS Feed */}
+        <link
+          rel="alternate"
+          type="application/rss+xml"
+          title="Nyein Phyo Aung's Blog"
+          href="/feed.xml"
+        />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
